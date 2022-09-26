@@ -5,17 +5,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-/**
- * @author zhangchengwei
- * @create 2022-09-25 11:06
- */
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @ToString
-public class Subject {
+public class Role {
+    private Integer id;
 
-    private String subjectName;
-
-    private Integer subjectScore;
+    private String name;
 }

@@ -7,7 +7,6 @@ import com.atguigu.crowd.exception.LoginFailedException;
 import com.atguigu.crowd.util.CrowdUitl;
 import com.atguigu.crowd.util.ResultEntity;
 import com.google.gson.Gson;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;

@@ -11,3 +11,10 @@ create table t_admin
 
 ALTER TABLE `project_crowd`.`t_admin`
     ADD UNIQUE INDEX(`login_acct`);
+
+CREATE TABLE `t_role`
+(
+    `id`   int(11) NOT NULL,
+    `name` varchar(100) DEFAULT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
