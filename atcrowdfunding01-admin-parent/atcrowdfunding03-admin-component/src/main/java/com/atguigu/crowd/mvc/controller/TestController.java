@@ -1,7 +1,6 @@
 package com.atguigu.crowd.mvc.controller;
 
 import com.atguigu.crowd.entity.Admin;
-import com.atguigu.crowd.entity.Student;
 import com.atguigu.crowd.service.api.AdminService;
 import com.atguigu.crowd.util.ResultEntity;
 import org.slf4j.Logger;
@@ -66,10 +65,10 @@ public class TestController {
         return "success";
     }
 
-    @RequestMapping("/send/array/four.json")
-    @ResponseBody
-    public ResultEntity<Student> testReceiveArrayFour(@RequestBody Student student) {
-        logger.debug("student:{}", student.toString());
-        return ResultEntity.successWithData(student);
-    }
+//    @RequestMapping("/send/array/four.json")
+//    @ResponseBody
+//    public ResultEntity<Student> testReceiveArrayFour(@RequestBody Student student) {
+//        logger.debug("student:{}", student.toString());
+//        return ResultEntity.successWithData(student);
+//    }
 }
