@@ -15,6 +15,15 @@ import javax.servlet.http.HttpSession;
  */
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 
+    /**
+     * 判断登录状态，如果已登录则放行
+     *
+     * @param request
+     * @param response
+     * @param handler
+     * @return
+     * @throws Exception
+     */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // 1、通过request对象获取session对象
