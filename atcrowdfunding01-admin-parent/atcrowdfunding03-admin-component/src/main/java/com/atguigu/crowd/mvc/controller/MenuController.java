@@ -4,9 +4,9 @@ import com.atguigu.crowd.entity.Menu;
 import com.atguigu.crowd.service.api.MenuService;
 import com.atguigu.crowd.util.ResultEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,13 +16,12 @@ import java.util.Map;
  * @author zhangchengwei
  * @create 2022-09-27 22:37
  */
-@Controller
+@RestController
 public class MenuController {
 
     @Autowired
     private MenuService menuService;
 
-    @ResponseBody
     @RequestMapping("/menu/get/whole/tree.json")
     public ResultEntity<Menu> getWholeTreeNew() {
         //1、查询全部的Menu对象
@@ -53,6 +52,27 @@ public class MenuController {
 
         }
         return ResultEntity.successWithData(root);
+    }
+
+    @RequestMapping("menu/sava.json")
+    public ResultEntity<String> savaMenu(Menu menu) {
+        menuService.saveMenu(menu);
+
+        return ResultEntity.successWithOutData();
+    }
+
+    @RequestMapping("menu/update.json")
+    public ResultEntity<String> updateMenu(Menu menu) {
+        menuService.update(menu);
+
+        return ResultEntity.successWithOutData();
+    }
+
+    @RequestMapping("menu/remove.json")
+    public ResultEntity<String> removeMenu(@RequestParam("id") Integer id) {
+        menuService.removeMenu(id);
+
+        return ResultEntity.successWithOutData();
     }
 
 
