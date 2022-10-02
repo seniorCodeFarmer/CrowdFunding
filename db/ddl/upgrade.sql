@@ -18,3 +18,11 @@ CREATE TABLE `t_role`
     `name` varchar(100) DEFAULT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `inner_admin_role`
+(
+    `id`       int(11) NOT NULL AUTO_INCREMENT,
+    `admin_id` int(11) DEFAULT NULL,
+    `role_id`  int(11) DEFAULT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

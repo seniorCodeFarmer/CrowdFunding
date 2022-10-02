@@ -29,4 +29,8 @@ public interface RoleMapper {
     int updateByPrimaryKey(Role record);
 
     List<Role> selectRoleByKeyword(@Param("keyword") String keyword);
+
+    List<Role> selectAssignedRole(Integer adminId);
+
+    List<Role> selectUnAssignedRole(Integer adminId);
 }
