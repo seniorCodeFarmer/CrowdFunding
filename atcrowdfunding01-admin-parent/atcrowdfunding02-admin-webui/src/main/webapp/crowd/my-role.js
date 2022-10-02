@@ -1,3 +1,74 @@
+function fillAuthTree() {
+    var ajaxReturn = $.ajax({
+        "url": "assign/get/all/auth.json",
+        "type": "post",
+        "dataType": "json",
+        "async": false
+    })
+
+    if (ajaxReturn.status != 200) {
+        layer.msg("请求处理出错！响应状态码是：" + ajaxReturn.status+"说明是：" + ajaxReturn.statusText);
+        return;
+    }
+
+    var authList = ajaxReturn.responseJSON.data;
+
+    var setting = {
+        "data": {
+            "simpleData": {
+                // 开启简单json的功能
+                "enable": true,
+                "pIdKey": "categoryId"
+            },
+            "key": {
+                "name": "title"
+            },
+        },
+        "check": {
+            "enable": true
+        }
+    };
+
+    // 生成树形结构
+    $.fn.zTree.init($("#authTreeDemo"),setting, authList);
+
+    // 把节点展开
+    var zTreeObj = $.fn.zTree.getZTreeObj("authTreeDemo");
+    zTreeObj.expandAll(true);
+
+    // 查询已分配的auth的id组成的数组
+    ajaxReturn = $.ajax({
+        "url": "assign/get/assignd/auth/id/by/role/id.json",
+        "type": "post",
+        "data": {
+            "roleId": window.roleId
+        },
+        "dataType": "json",
+        "async": false
+    })
+
+    if (ajaxReturn.status != 200) {
+        layer.msg("请求处理出错！响应状态码是：" + ajaxReturn.status+"说明是：" + ajaxReturn.statusText);
+        return;
+    }
+
+    var authIdList = ajaxReturn.responseJSON.data;
+
+    // 根据authIdArray把树形结构中对应的多选框选中
+    for(var i = 0;i <authIdList.length;i++) {
+        var authId = authIdList[i];
+
+        // 根据id查询树形结构中对应的节点
+        var treeNode = zTreeObj.getNodeByParam("id",authId);
+
+        // 将treeNode 设置为被勾选
+        // checked设置为true表示节点勾选
+        // checkTypeFlag 设置为false，表示不联动
+        zTreeObj.checkNode(treeNode,true,false);
+    }
+}
+
+
 // 声明专门的函数显示确认模态框
 function showConfirmModal(roleArray) {
     $("#confirmModal").modal("show");
@@ -88,7 +159,7 @@ function fillTableBody(pageInfo) {
         var checkbok = "<td><input id='"+roleId+"' class='itemBox' type='checkbox'></td>";
         var roleNameTd = "<td>" + roleName + "</td>";
 
-        var checkBtn = "<button type='button' class='btn btn-success btn-xs'><i class='glyphicon glyphicon-check'></i></button>";
+        var checkBtn = "<button id='"+roleId+"' type='button' class='btn btn-success btn-xs checkBtn'><i class='glyphicon glyphicon-check'></i></button>";
         // 通过button标签的id属性，把roleId值传递到button按钮的单击响应函数中
         var pencilBtn = "<button id='"+roleId+"' type='button' class='btn btn-primary btn-xs pencilBtn'><i class='glyphicon glyphicon-pencil'></i></button>";
         //

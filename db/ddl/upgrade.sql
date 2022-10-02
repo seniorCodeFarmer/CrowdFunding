@@ -26,3 +26,20 @@ CREATE TABLE `inner_admin_role`
     `role_id`  int(11) DEFAULT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `t_auth`
+(
+    `id`          INT ( 11 ) NOT NULL AUTO_INCREMENT,
+    `name`        VARCHAR(200) DEFAULT NULL,
+    `title`       VARCHAR(200) DEFAULT NULL,
+    `category_id` int(11) DEFAULT NULL,
+    PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `inner_role_auth`
+(
+    `id`      int(11) NOT NULL AUTO_INCREMENT,
+    `role_id` int(11) DEFAULT NULL,
+    `auth_id` int(11) DEFAULT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
